@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="asserts/css/content.css">
+    <link rel="stylesheet" th:href="@{../asserts/css/content.css}">
+    <link rel="stylesheet" href="asserts/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{../asserts/css/bootstrap.min.css}">
+    <script src="asserts/js/md5.min.js"></script>
+    <script th:src="@{../asserts/js/md5.min.js}"></script>
+
+    <script>
+        function changePwd() {
+            var password = document.getElementById("password");
+            pwd = password.value;
+            for (let i = 0; i < 3; i++) {
+                pwd = md5(pwd);
+            }
+
+            password.value = pwd;
+        }
+    </script>
+</head>
+<body>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div>
+        <form th:action="@{/user/login}" method="post" onsubmit="changePwd()">
+            <table>
+                <tbody style="font-size: large" class="form-control">
+                <tr>
+                    <td colspan="2">
+                        <h2 style="text-align: center">登录</h2>
+                    </td>
+                </tr>
+                <tr th:if="${not #strings.isEmpty(msg)}">
+                    <td colspan="2">
+                        <p style="color: red; text-align: center" th:text="${msg}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户名：</td>
+                    <td>
+                        <label>
+                            <input name="username" class="form-control" type="text" placeholder="用户名" required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td>
+                        <label>
+                            <input id="password" name="password" class="form-control" type="password" placeholder="密码"
+                                   required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">
+                        <button class="btn btn-sm btn-primary btn-block" type="submit">
+                            登录
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+</main>
+</body>
+</html>

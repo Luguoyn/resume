@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="asserts/css/content.css">
+    <link rel="stylesheet" th:href="@{../asserts/css/content.css}">
+    <link rel="stylesheet" href="asserts/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{../asserts/css/bootstrap.min.css}">
+    <script src="asserts/js/md5.min.js"></script>
+    <script th:src="@{../asserts/js/md5.min.js}"></script>
+
+    <script th:inline="javascript">
+        function checkPwd() {
+            var flag = false;
+            var msg = "";
+            var pre = document.getElementById("prePwd");
+            var pwd = pre.value;
+            for (let i = 0; i < 3; i++) {
+                pwd = md5(pwd);
+            }
+            var prePwd = [[${session.user.getPassword()}]];
+            if (pwd !== prePwd) {
+                msg += "原密码输入有误！\n";
+                flag = true;
+            }
+
+            var newP = document.getElementById("newPwd");
+            var repP = document.getElementById("repPwd");
+
+            var newPwd = newP.value;
+            var repPwd = repP.value;
+
+            if (newPwd === pre.value) {
+                msg += "新旧密码不能相同！\n";
+                flag = true;
+            }
+
+            if (newPwd !== repPwd) {
+                msg += "新密码与重复密码不相同！\n";
+                flag = true;
+            }
+
+            if (flag) {
+                alert(msg);
+                return false;
+            }
+
+            for (let i = 0; i < 3; i++) {
+                newPwd = md5(newPwd);
+                repPwd = md5(repPwd);
+            }
+
+            pre.value = pwd;
+            newP.value = newPwd;
+            repP.value = repPwd;
+            return true;
+        }
+
+
+    </script>
+</head>
+<body>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div>
+        <form th:action="@{/user/update}" method="post" onsubmit="return checkPwd()">
+            <table>
+                <tbody style="font-size: large" class="form-control">
+                <tr>
+                    <td colspan="2">
+                        <h2 style="text-align: center">修改密码</h2>
+                    </td>
+                </tr>
+                <tr th:if="${not #strings.isEmpty(msg)}">
+                    <td colspan="2">
+                        <p style="color: red; text-align: center" th:text="${msg}"></p>
+                    </td>
+                </tr>
+                <tr hidden>
+                    <td>用户名：</td>
+                    <td>
+                        <label>
+                            <input id="username" name="username" class="form-control"
+                                   th:value="${session.user.getUsername()}" type="text" placeholder="请输入用户名"
+                                   required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>原密码：</td>
+                    <td>
+                        <label>
+                            <input id="prePwd" name="prePwd" class="form-control" type="password" placeholder="请输入原始密码"
+                                   required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>新密码：</td>
+                    <td>
+                        <label>
+                            <input id="newPwd" name="newPwd" class="form-control" type="password" placeholder="请输入新密码"
+                                   required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>重复新密码：</td>
+                    <td>
+                        <label>
+                            <input id="repPwd" name="repPwd" class="form-control" type="password" placeholder="请重复新密码"
+                                   required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">
+                        <button class="btn btn-sm btn-primary btn-block" type="submit">
+                            修改
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="asserts/css/content.css">
+    <link rel="stylesheet" th:href="@{../../asserts/css/content.css}">
+    <link rel="stylesheet" href="asserts/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{../../asserts/css/bootstrap.min.css}">
+</head>
+<body>
+<div>
+    <form method="post" th:action="@{/mus/query}">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <td style="font-size: large">输入歌曲或歌手名查询：</td>
+                <td>
+                    <input type="text"  class="form-control col-form-label-sm" th:value="${query} == null ?'周杰伦' : ${query}" name="name">
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-primary btn-block" type="submit">查询</button>
+                </td>
+            </tr>
+            </thead>
+        </table>
+    </form>
+</div>
+<div>
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <td>歌曲名</td>
+            <td>歌手</td>
+            <td th:if="${#request.getSession().getAttribute('user')} != null">
+                <a th:href="@{/mus/add}">添加</a>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="mus:${muss}">
+            <td th:text="${mus.getName()}"></td>
+            <td th:text="${mus.getSinger()}"></td>
+            <td th:if="${#request.getSession().getAttribute('user')} != null">
+                <a class="aButton" th:href="@{/mus/update/{id}(id=${mus.getId()})}">编辑</a>
+                <a class="aButton" th:href="@{/mus/delete/{id}(id=${mus.getId()})}">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

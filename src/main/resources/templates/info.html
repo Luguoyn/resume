@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="asserts/css/content.css">
+    <link rel="stylesheet" th:href="@{../asserts/css/content.css}">
+    <link rel="stylesheet" href="asserts/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{../asserts/css/bootstrap.min.css}">
+    <title>Title</title>
+</head>
+<body>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div>
+        <table>
+            <tbody style="font-size: large" class="form-control">
+            <tr>
+                <td colspan="2">
+                    <h2 style="text-align: center">管理</h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h4 th:text="'尊敬的  ' + ${session.user.username}"></h4>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h4>您已登陆，可在列表中进行修改操作</h4>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <h4>若操作完成，可轻按登出以释放权限</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a th:href="@{/user/update}">
+                        <button class="btn btn-sm btn-primary btn-block">修改密码</button>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/user/logout}">
+                        <button class="btn btn-sm btn-primary btn-block">退出登录</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

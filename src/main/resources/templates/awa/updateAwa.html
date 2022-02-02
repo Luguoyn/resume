@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="asserts/css/content.css">
+    <link rel="stylesheet" th:href="@{../../asserts/css/content.css}">
+    <link rel="stylesheet" href="asserts/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{../../asserts/css/bootstrap.min.css}">
+</head>
+<body>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div>
+        <form th:action="@{/awa/update}" method="post">
+            <table>
+                <tbody style="font-size: large" class="form-control">
+                <tr>
+                    <td colspan="2">
+                        <h2 style="text-align: center">编辑获奖信息</h2>
+                    </td>
+                </tr>
+                <tr hidden>
+                    <td>ID：</td>
+                    <td>
+                        <label>
+                            <input name="id" type="text"  class="form-control"  th:value="${awa.getId()}" required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>奖项名称：</td>
+                    <td>
+                        <label>
+                            <input name="name" type="text" class="form-control"  th:value="${awa.getName()}" required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>获奖时间：</td>
+                    <td>
+                        <label>
+                            <input name="time" type="date" class="form-control"  th:value="${#dates.format(awa.getTime(),'yyyy-MM-dd')}" required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">
+                        <button class="btn btn-sm btn-primary btn-block" type="submit">编辑</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+</main>
+</body>
+</html>

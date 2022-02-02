@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>我的个人主页</title>
+    <link rel="stylesheet" href="asserts/css/index.css">
+    <link rel="stylesheet" href="asserts/css/bootstrap.min.css">
+</head>
+<body>
+<div id="mainbox" class="form-control">
+    <div id="header"><span>我的个人简历</span></div>
+    <div id="nav">
+        <!--        <span style="float:left;">导航栏</span>-->
+        <ul>
+            <li><a th:href="@{/mus}" target="mainframe">音乐歌单</a></li>
+            <li><a th:href="@{/ach}" target="mainframe">所学课程</a></li>
+            <li><a th:href="@{/awa}" target="mainframe">获奖情况</a></li>
+            <li><a th:href="@{/user}" target="mainframe">管理</a></li>
+        </ul>
+    </div>
+    <div id="leftarticle">
+        <div style="width: 220px; padding: 0; margin: auto;">
+            <ul class="form-control">
+                <li>姓名： 张三</li>
+                <li>性别： 男</li>
+                <li>学号： 1234567890</li>
+                <li>籍贯： 中国</li>
+                <li>照片： <img src="asserts/img/photo.png" width="60%" height="60%"></li>
+            </ul>
+        </div>
+
+
+    </div>
+    <div id="mainarticle">
+        <!--        <span><p id="pageTitle">爱好特长</p></span>-->
+        <iframe th:src="@{/ach}" name="mainframe"
+                style="width:100%;height:100%;" scrolling="yes" frameborder="0">
+        </iframe>
+    </div>
+    <div id="footer"><span style="color: lightcyan">2021 - 2022 &copy;张三</span></div>
+</div>
+</body>
+</html>

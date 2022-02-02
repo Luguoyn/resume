@@ -1,0 +1,24 @@
+li{
+    font-size: x-large;
+    font-family: 幼圆, serif;
+    color: brown;
+    font-weight: bold;
+}
+
+td{
+     font-size: xx-small;
+     font-family: 幼圆, serif;
+     color: brown;
+     font-weight: bold;
+ }
+
+table{
+    margin: 0 auto;
+    padding: 0;
+    border-collapse: separate;
+    border-spacing: 50px 10px;  /* 水平间距 垂直间距 */
+    font-size: small;
+    font-family: 幼圆, serif;
+    color: brown;
+    font-weight: bold;
+}

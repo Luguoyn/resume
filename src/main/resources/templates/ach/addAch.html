@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="asserts/css/content.css">
+    <link rel="stylesheet" th:href="@{../../asserts/css/content.css}">
+    <link rel="stylesheet" href="asserts/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{../../asserts/css/bootstrap.min.css}">
+</head>
+<body>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <div>
+        <form th:action="@{/ach/add}" method="post" onsubmit="return check()">
+            <table>
+                <tbody style="font-size: large" class="form-control">
+                <tr>
+                    <td colspan="2">
+                        <h2 style="text-align: center">添加成绩信息</h2>
+                    </td>
+                </tr>
+                <tr th:if="${not #strings.isEmpty(msg)}">
+                    <td colspan="2">
+                        <p style="color: red; text-align: center" th:text="${msg}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>名称：</td>
+                    <td>
+                        <label>
+                            <input name="name" class="form-control" type="text" th:value="${ach!=null}?${ach.getName()}" placeholder="请输入科目名称" required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>成绩：</td>
+                    <td>
+                        <label>
+                            <input id="grade" name="grade" class="form-control" type="number" th:value="${ach!=null}?${ach.getGrade()}" placeholder="请输入考试成绩"
+                                   required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>学分：</td>
+                    <td>
+                        <label>
+                            <input id="credit" name="credit" class="form-control" type="number" th:value="${ach!=null}?${ach.getCredit()}" placeholder="请输入学分"
+                                   required>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">
+                        <button class="btn btn-sm btn-primary btn-block" type="submit">添加</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+</main>
+</body>
+<script>
+    function check() {
+        var credit = document.getElementById(`credit`);
+        var grade = document.getElementById('grade');
+        var flag = false;
+        var msg = "";
+        if (credit.value < 0 || credit.value > 5) {
+            flag = true;
+            msg += "学分需要在0到5之间！\n";
+        }
+        if (grade.value < 0 || grade.value > 100) {
+            flag = true;
+            msg += "成绩需要在0到100之间！\n";
+        }
+        if(flag){
+            alert(msg);
+            return false;
+        }
+
+        return true;
+
+    }
+</script>
+</html>
